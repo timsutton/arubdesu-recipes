@@ -15,8 +15,6 @@
         <string>MSOneNote2016</string>
         <key>MUNKI_REPO_SUBDIR</key>
         <string>apps</string>
-        <key>CULTURE_CODE</key>
-        <string>0409</string>
         <key>pkginfo</key>
         <dict>
             <key>catalogs</key>

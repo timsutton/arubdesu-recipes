@@ -27,6 +27,8 @@ from autopkglib import Processor, ProcessorError
 
 __all__ = ["MSOffice2016URLandUpdateInfoProvider"]
 
+# Defaults to 'en-US' as the installers and updates seem to be
+# multilingual.
 CULTURE_CODE = "0409"
 BASE_URL = "http://www.microsoft.com/mac/autoupdate/%s15.xml"
 PROD_DICT = {
