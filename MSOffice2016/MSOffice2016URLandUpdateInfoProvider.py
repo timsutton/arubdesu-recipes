@@ -48,12 +48,10 @@ class MSOffice2016URLandUpdateInfoProvider(Processor):
         },
         "version": {
             "required": False,
-            "description": "Update version number. Defaults to latest.",
-        },
-        "base_url": {
-            "required": False,
-            "description": ("Default is %s. If this is given, culture_code "
-                "is ignored." % (BASE_URL % CULTURE_CODE)),
+            "default": "latest",
+            "description": ("Update version to fetch. Currently the only "
+                            "supported value is 'latest', which is the "
+                            "default."),
         },
         "munki_update_name": {
             "required": False,
@@ -146,10 +144,8 @@ class MSOffice2016URLandUpdateInfoProvider(Processor):
         """Gets info about an installer from MS metadata."""
         produit = self.env.get("product")
         prod_code = PROD_DICT.get(produit)
-        version_str = self.env.get("version")
-        if not version_str:
-            version_str = "latest"
         base_url = BASE_URL % (CULTURE_CODE + prod_code)
+        version_str = self.env["version"]
         # Get metadata URL
         req = urllib2.Request(base_url)
         # Add the MAU User-Agent, since MAU feed server seems to explicitly block
@@ -166,27 +162,11 @@ class MSOffice2016URLandUpdateInfoProvider(Processor):
 
         metadata = plistlib.readPlistFromString(data)
         if version_str == "latest":
-            # Outlook 'update' metadata is a list of dicts.
-            # we need to sort by date.
+            # Still sort by date, in case we should ever need to support
+            # fetching versions other than 'latest'.
             sorted_metadata = sorted(metadata, key=itemgetter('Date'))
             # choose the last item, which should be most recent.
             item = sorted_metadata[-1]
-        else:
-            # we've been told to find a specific version. Unfortunately, the
-            # Outlook updates metadata items don't have a version attibute.
-            # The version is only in text in the update's Title. So we look for
-            # that...although as of January 2015 it's not included...
-            # Titles would normally be in the format "Outlook x.y.z Update"
-            padded_version_str = " " + version_str + " "
-            matched_items = [item for item in metadata
-                            if padded_version_str in item["Title"]]
-            if len(matched_items) != 1:
-                raise ProcessorError(
-                    "Could not find version %s in update metadata. "
-                    "Updates that are available: %s"
-                    % (version_str, ", ".join(["'%s'" % item["Title"]
-                                               for item in metadata])))
-            item = matched_items[0]
 
         self.env["url"] = item["Location"]
         self.env["pkg_name"] = item["Payload"]
