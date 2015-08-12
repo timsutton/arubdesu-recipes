@@ -36,6 +36,8 @@
                     <string>/Applications/Microsoft OneNote.app</string>
                 </dict>
             </array>
+            <key>name</key>
+            <string>%NAME%</string>
             <key>blocking_applications</key>
             <array>
               <string>Microsoft OneNote</string>

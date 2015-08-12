@@ -39,6 +39,8 @@ Set VERSION to a specific version number to download that version instead.
                     <string>/Applications/Microsoft PowerPoint.app</string>
                 </dict>
             </array>
+            <key>name</key>
+            <string>%NAME%</string>
             <key>blocking_applications</key>
             <array>
               <string>Microsoft PowerPoint</string>
