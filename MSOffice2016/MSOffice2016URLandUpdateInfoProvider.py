@@ -19,7 +19,6 @@ import plistlib
 import urllib2
 import re
 
-# from distutils.version import LooseVersion
 from operator import itemgetter
 
 from autopkglib import Processor, ProcessorError
@@ -62,6 +61,11 @@ class MSOffice2016URLandUpdateInfoProvider(Processor):
             "description":
                 "Some pkginfo fields extracted from the Microsoft metadata.",
         },
+        "version": {
+            "description":
+                ("The version of the update as extracted from the Microsoft "
+                 "metadata.")
+        }
     }
     description = __doc__
 
@@ -69,43 +73,45 @@ class MSOffice2016URLandUpdateInfoProvider(Processor):
         """Raises an exeception if the Trigger Condition or
         Triggers for an update don't match what we expect.
         Protects us if these change in the future."""
-        # Hopefully this breaks soon, if they stop using "Registered File" placeholders,
-        # but it's not buying us much nor utilized at present
+        # MS currently uses "Registered File" placeholders, which get replaced
+        # with the bundle of a given application ID. In other words, this is
+        # the bundle version of the app itself.
         if not item.get("Trigger Condition") == ["and", "Registered File"]:
             raise ProcessorError(
                 "Unexpected Trigger Condition in item %s: %s"
                 % (item["Title"], item["Trigger Condition"]))
         if not "Registered File" in item.get("Triggers", {}):
             raise ProcessorError(
-                "Missing expected MCP Trigger in item %s" % item["Title"])
+                "Missing expected 'and Registered File' Trigger in item "
+                "%s" % item["Title"])
 
     def getInstallsItems(self, item):
-        """Attempts to parse the Triggers to create an installs item"""
-        # currently unused, and unnecessary as receipts are sufficient... for now...
+        """Attempts to parse the Triggers to create an installs item using
+        only manifest data, making the assumption that CFBundleVersion and
+        CFBundleShortVersionString are equal."""
         self.sanityCheckExpectedTriggers(item)
-        triggers = item.get("Triggers", {})
-        paths = [triggers[key].get("File") for key in triggers.keys()]
-        # if "Contents/Info.plist" in paths:
-            # use the apps info.plist as installs item
+        version = self.getVersion(item)
         installs_item = {
-            "CFBundleShortVersionString": self.getVersion(item),
-            "CFBundleVersion": self.getVersion(item),
+            "CFBundleShortVersionString": version,
+            "CFBundleVersion": version,
             "path": ("/Applications/Microsoft %s.app" % self.env["product"]),
             "type": "application",
-            "version": self.getVersion(item),
-            "version_comparison_key": "CFBundleShortVersionString"
         }
         return [installs_item]
-        # return None
 
     def getVersion(self, item):
         """Extracts the version of the update item."""
-        # currentlyrelies on the item having the version at  the end of the title,
+        # We currently expect the version at the end of the Title key,
         # e.g.: "Microsoft Excel Update 15.10.0"
-        value_to_parse = item["Title"]
-        just_minor = re.search("( Update )(\d+\.\d+\.\d+)", value_to_parse)
-        version_str = just_minor.group(2)
-        return version_str
+        # item["Title"] = "Microsoft Excel Update 15.10"
+        match = re.search(
+            r"( Update )(?P<version>\d+\.\d+(\.\d)*)", item["Title"])
+        if not match:
+            raise ProcessorError(
+                "Error validating Office 2016 version extracted "
+                "from Title manifest value: '%s'" % item["Title"])
+        version = match.group('version')
+        return version
 
     def valueToOSVersionString(self, value):
         """Converts a value to an OS X version number"""
@@ -179,6 +185,7 @@ class MSOffice2016URLandUpdateInfoProvider(Processor):
         installs_items = self.getInstallsItems(item)
         if installs_items:
             pkginfo["installs"] = installs_items
+        self.env["version"] = self.getVersion(item)
         self.env["additional_pkginfo"] = pkginfo
         self.env["url"] = item["Location"]
         self.output("Additional pkginfo: %s" % self.env["additional_pkginfo"])
