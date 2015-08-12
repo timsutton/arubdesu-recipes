@@ -203,7 +203,6 @@ class MSOffice2016URLandUpdateInfoProvider(Processor):
         pkginfo["description"] = "<html>%s</html>" % manifest_description
         self.env["description"] = manifest_description
 
-        pkginfo["display_name"] = item["Title"]
         max_os = self.valueToOSVersionString(item['Max OS'])
         min_os = self.valueToOSVersionString(item['Min OS'])
         if max_os != "0.0.0":
