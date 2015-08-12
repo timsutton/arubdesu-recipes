@@ -13,6 +13,8 @@ Currently, the only supported value for VERSION is 'latest'.
     <string>0.3.1</string>
     <key>Input</key>
     <dict>
+        <key>LOCALE_ID</key>
+        <string>1033</string>
         <key>NAME</key>
         <string>MSExcel2016</string>
         <key>VERSION</key>
@@ -27,6 +29,8 @@ Currently, the only supported value for VERSION is 'latest'.
             <string>MSOffice2016URLandUpdateInfoProvider</string>
             <key>Arguments</key>
             <dict>
+                <key>locale_id</key>
+                <string>%LOCALE_ID%</string>
                 <key>product</key>
                 <string>Excel</string>
             </dict>

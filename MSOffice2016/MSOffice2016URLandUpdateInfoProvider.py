@@ -37,10 +37,21 @@ PROD_DICT = {
     'PowerPoint':'PPT3',
     'Word':'MSWD',
 }
+LOCALE_ID_INFO_URL = "https://msdn.microsoft.com/en-us/goglobal/bb964664.aspx"
 
 class MSOffice2016URLandUpdateInfoProvider(Processor):
     """Provides a download URL for the most recent version of MS Office 2016."""
     input_variables = {
+        "locale_id": {
+            "required": False,
+            "default": "1033",
+            "description": (
+                "Locale ID that determines the language "
+                "that is retrieved from the metadata, currently only "
+                "used by the update description. See %s "
+                "for a list of locale codes. The default is en-US."
+                % LOCALE_ID_INFO_URL)
+        },
         "product": {
             "required": True,
             "description": "Name of product to fetch, e.g. Excel.",
@@ -61,11 +72,16 @@ class MSOffice2016URLandUpdateInfoProvider(Processor):
             "description":
                 "Some pkginfo fields extracted from the Microsoft metadata.",
         },
+        "description": {
+            "description":
+                "Description of the update from the manifest, in the language "
+                "given by the locale_id input variable.",
+        },
         "version": {
             "description":
                 ("The version of the update as extracted from the Microsoft "
                  "metadata.")
-        }
+        },
     }
     description = __doc__
 
@@ -172,9 +188,21 @@ class MSOffice2016URLandUpdateInfoProvider(Processor):
         # now extract useful info from the rest of the metadata that could
         # be used in a pkginfo
         pkginfo = {}
-        # currently ignoring latest dict and cherry-picking en-US, may revisit
-        all_localizations = metadata[0].get("Localized")
-        pkginfo["description"] = "<html>%s</html>" % all_localizations['1033']['Short Description']
+        # Get a copy of the description in our locale_id
+        all_localizations = item.get("Localized")
+        lcid = self.env["locale_id"]
+        if lcid not in all_localizations:
+            raise ProcessorError(
+                "Locale ID %s not found in manifest metadata. Available IDs: "
+                "%s. See %s"
+                " for more details."
+                % (lcid, ", ".join(all_localizations.keys()), LOCALE_ID_INFO_URL))
+        manifest_description = all_localizations[lcid]['Short Description']
+        # Store the description in a separate output variable and in our pkginfo
+        # directly.
+        pkginfo["description"] = "<html>%s</html>" % manifest_description
+        self.env["description"] = manifest_description
+
         pkginfo["display_name"] = item["Title"]
         max_os = self.valueToOSVersionString(item['Max OS'])
         min_os = self.valueToOSVersionString(item['Min OS'])
@@ -185,6 +213,7 @@ class MSOffice2016URLandUpdateInfoProvider(Processor):
         installs_items = self.getInstallsItems(item)
         if installs_items:
             pkginfo["installs"] = installs_items
+
         self.env["version"] = self.getVersion(item)
         self.env["additional_pkginfo"] = pkginfo
         self.env["url"] = item["Location"]
