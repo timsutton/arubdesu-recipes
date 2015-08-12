@@ -207,8 +207,7 @@ class MSOffice2016URLandUpdateInfoProvider(Processor):
         if installs_items:
             pkginfo["installs"] = installs_items
         self.env["additional_pkginfo"] = pkginfo
-        # re-setting so we can substitute in %20's for spaces
-        self.env["url"] = item["Location"].replace(' ', '%20')
+        self.env["url"] = item["Location"]
         self.output("Additional pkginfo: %s" % self.env["additional_pkginfo"])
 
     def main(self):
