@@ -58,9 +58,6 @@ class MSOffice2016URLandUpdateInfoProvider(Processor):
         "url": {
             "description": "URL to the latest installer.",
         },
-        "pkg_name": {
-            "description": "Name of the package.",
-        },
         "additional_pkginfo": {
             "description":
                 "Some pkginfo fields extracted from the Microsoft metadata.",
@@ -164,7 +161,6 @@ class MSOffice2016URLandUpdateInfoProvider(Processor):
             item = sorted_metadata[-1]
 
         self.env["url"] = item["Location"]
-        self.env["pkg_name"] = item["Payload"]
         self.output("Found URL %s" % self.env["url"])
         self.output("Got update: '%s'" % item["Title"])
         # now extract useful info from the rest of the metadata that could
