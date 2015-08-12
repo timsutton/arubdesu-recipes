@@ -13,9 +13,9 @@ http://msdn.microsoft.com/en-us/library/ee825488(v=cs.20).aspx for a table of Cu
     <key>Input</key>
     <dict>
         <key>NAME</key>
-        <string>Microsoft OneNote 2016</string>
         <key>CULTURE_CODE</key>
         <string>0409</string>
+        <string>MSOneNote2016</string>
         <key>PKG_NAME</key>
         <string>%NAME%_Update</string>
     </dict>

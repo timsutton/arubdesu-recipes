@@ -13,7 +13,7 @@ http://msdn.microsoft.com/en-us/library/ee825488(v=cs.20).aspx for a table of Cu
     <key>Input</key>
     <dict>
         <key>NAME</key>
-        <string>Microsoft OneNote</string>
+        <string>MSOneNote2016</string>
         <key>MUNKI_REPO_SUBDIR</key>
         <string>apps</string>
         <key>CULTURE_CODE</key>

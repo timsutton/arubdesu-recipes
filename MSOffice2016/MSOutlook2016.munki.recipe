@@ -14,7 +14,7 @@ http://msdn.microsoft.com/en-us/library/ee825488(v=cs.20).aspx for a table of Cu
     <key>Input</key>
     <dict>
         <key>NAME</key>
-        <string>Microsoft Outlook</string>
+        <string>MSOutlook2016</string>
         <key>MUNKI_REPO_SUBDIR</key>
         <string>apps/MSOutlook</string>
         <key>VERSION</key>

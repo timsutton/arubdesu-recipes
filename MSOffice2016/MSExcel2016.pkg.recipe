@@ -14,7 +14,7 @@ http://msdn.microsoft.com/en-us/library/ee825488(v=cs.20).aspx for a table of Cu
     <key>Input</key>
     <dict>
         <key>NAME</key>
-        <string>Microsoft Excel 2016</string>
+        <string>MSExcel2016</string>
         <key>VERSION</key>
         <string>latest</string>
         <key>CULTURE_CODE</key>
