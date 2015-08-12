@@ -33,6 +33,8 @@ Currently, the only supported value for VERSION is 'latest'.
                 <string>%LOCALE_ID%</string>
                 <key>product</key>
                 <string>Word</string>
+                <key>version</key>
+                <string>%VERSION%</string>
             </dict>
         </dict>
         <dict>

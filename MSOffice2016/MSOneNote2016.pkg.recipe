@@ -17,6 +17,8 @@ Currently, the only supported value for VERSION is 'latest'.
         <string>1033</string>
         <key>NAME</key>
         <string>MSOneNote2016</string>
+        <key>VERSION</key>
+        <string>latest</string>
         <key>PKG_NAME</key>
         <string>%NAME%_Update</string>
     </dict>
@@ -31,6 +33,8 @@ Currently, the only supported value for VERSION is 'latest'.
                 <string>%LOCALE_ID%</string>
                 <key>product</key>
                 <string>OneNote</string>
+                <key>version</key>
+                <string>%VERSION%</string>
             </dict>
         </dict>
         <dict>
