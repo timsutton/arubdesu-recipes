@@ -44,13 +44,6 @@ class MSOffice2016URLandUpdateInfoProvider(Processor):
             "required": True,
             "description": "Name of product to fetch, e.g. Excel.",
         },
-        "culture_code": {
-            "required": False,
-            "description": ("See "
-                "http://msdn.microsoft.com/en-us/library/ee825488(v=cs.20).aspx"
-                " for a table of CultureCodes. Defaults to 0409, which "
-                "corresponds to en-US (English - United States)"),
-        },
         "version": {
             "required": False,
             "description": "Update version number. Defaults to latest.",
@@ -149,13 +142,12 @@ class MSOffice2016URLandUpdateInfoProvider(Processor):
 
     def getInstallerinfo(self):
         """Gets info about an installer from MS metadata."""
-        culture_code = self.env.get("culture_code", CULTURE_CODE)
         produit = self.env.get("product")
         prod_code = PROD_DICT.get(produit)
-        base_url = BASE_URL % (culture_code + prod_code)
         version_str = self.env.get("version")
         if not version_str:
             version_str = "latest"
+        base_url = BASE_URL % (CULTURE_CODE + prod_code)
         # Get metadata URL
         req = urllib2.Request(base_url)
         # Add the MAU User-Agent, since MAU feed server seems to explicitly block
