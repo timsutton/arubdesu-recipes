@@ -42,6 +42,8 @@ Currently, the only supported value for VERSION is 'latest'.
             </array>
             <key>name</key>
             <string>%NAME%</string>
+            <key>unattended_install</key>
+            <true/>
             <key>blocking_applications</key>
             <array>
               <string>Microsoft PowerPoint</string>
