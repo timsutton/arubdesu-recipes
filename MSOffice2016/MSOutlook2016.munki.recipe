@@ -15,7 +15,7 @@ Set VERSION to a specific version number to download that version instead.
         <key>NAME</key>
         <string>MSOutlook2016</string>
         <key>MUNKI_REPO_SUBDIR</key>
-        <string>apps/MSOutlook</string>
+        <string>apps</string>
         <key>VERSION</key>
         <string>latest</string>
         <key>pkginfo</key>

@@ -17,7 +17,7 @@ Set VERSION to a specific version number to download that version instead.
         <key>VERSION</key>
         <string>latest</string>
         <key>PKG_NAME</key>
-        <string>Microsoft_Outlook_Update</string>
+        <string>%NAME%_Update</string>
     </dict>
     <key>Process</key>
     <array>
