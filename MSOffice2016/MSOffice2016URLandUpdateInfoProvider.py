@@ -31,13 +31,14 @@ CULTURE_CODE = "0409"
 BASE_URL = "http://www.microsoft.com/mac/autoupdate/%s15.xml"
 PROD_DICT = {
     'Excel':'XCEL',
+    'OneNote':'ONMC',
+    'Outlook':'OPIM',
     'PowerPoint':'PPT3',
     'Word':'MSWD',
-    'OneNote':'ONMC'
 }
 
 class MSOffice2016URLandUpdateInfoProvider(Processor):
-    """Provides a download URL for the most recent version of MS Outlook."""
+    """Provides a download URL for the most recent version of MS Office 2016."""
     input_variables = {
         "product": {
             "required": True,

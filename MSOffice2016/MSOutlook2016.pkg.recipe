@@ -26,13 +26,11 @@ http://msdn.microsoft.com/en-us/library/ee825488(v=cs.20).aspx for a table of Cu
     <array>
         <dict>
             <key>Processor</key>
-            <string>MSOutlookURLandUpdateInfoProvider</string>
+            <string>MSOffice2016URLandUpdateInfoProvider</string>
             <key>Arguments</key>
             <dict>
-                <key>culture_code</key>
-                <string>%CULTURE_CODE%</string>
-                <key>version</key>
-                <string>%VERSION%</string>
+                <key>product</key>
+                <string>Outlook</string>
             </dict>
         </dict>
         <dict>
