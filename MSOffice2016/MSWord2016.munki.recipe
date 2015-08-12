@@ -21,6 +21,12 @@ Currently, the only supported value for VERSION is 'latest'.
         <string>latest</string>
         <key>pkginfo</key>
         <dict>
+            <key>blocking_applications</key>
+            <array>
+                <string>Microsoft Word</string>
+                <string>Microsoft Error Reporting</string>
+                <string>Microsoft Auto Update</string>
+            </array>
             <key>catalogs</key>
             <array>
                 <string>testing</string>
@@ -44,12 +50,6 @@ Currently, the only supported value for VERSION is 'latest'.
             <string>%NAME%</string>
             <key>unattended_install</key>
             <true/>
-            <key>blocking_applications</key>
-            <array>
-              <string>Microsoft Word</string>
-              <string>Microsoft Error Reporting</string>
-              <string>Microsoft Auto Update</string>
-            </array>
         </dict>
     </dict>
     <key>ParentRecipe</key>
