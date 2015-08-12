@@ -19,8 +19,6 @@ Currently, the only supported value for VERSION is 'latest'.
         <string>MSOutlook2016</string>
         <key>VERSION</key>
         <string>latest</string>
-        <key>PKG_NAME</key>
-        <string>%NAME%_Update</string>
     </dict>
     <key>Process</key>
     <array>
@@ -43,7 +41,7 @@ Currently, the only supported value for VERSION is 'latest'.
             <key>Arguments</key>
             <dict>
                 <key>filename</key>
-                <string>%PKG_NAME%.pkg</string>
+                <string>%NAME%-%version%.pkg</string>
             </dict>
         </dict>
         <dict>
