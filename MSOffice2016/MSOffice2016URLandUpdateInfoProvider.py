@@ -214,10 +214,6 @@ class MSOffice2016URLandUpdateInfoProvider(Processor):
         installs_items = self.getInstallsItems(item)
         if installs_items:
             pkginfo["installs"] = installs_items
-        if not self.env.get("munki_update_name"):
-            pkginfo['name'] = ("%s_2016_Installer" % self.env.get("product"))
-        else:
-            pkginfo['name'] = self.env["munki_update_name"]
         self.env["additional_pkginfo"] = pkginfo
         # re-setting so we can substitute in %20's for spaces
         self.env["url"] = item["Location"].replace(' ', '%20')

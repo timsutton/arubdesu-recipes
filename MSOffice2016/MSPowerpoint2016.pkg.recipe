@@ -19,8 +19,6 @@ http://msdn.microsoft.com/en-us/library/ee825488(v=cs.20).aspx for a table of Cu
         <string>latest</string>
         <key>CULTURE_CODE</key>
         <string>0409</string>
-        <key>MUNKI_UPDATE_NAME</key>
-        <string>PowerPoint_2016_Installer</string>
         <key>PKG_NAME</key>
         <string>%NAME%_Update</string>
     </dict>
@@ -33,8 +31,6 @@ http://msdn.microsoft.com/en-us/library/ee825488(v=cs.20).aspx for a table of Cu
             <dict>
                 <key>product</key>
                 <string>PowerPoint</string>
-                <key>munki_update_name</key>
-                 <string>%MUNKI_UPDATE_NAME%</string>
             </dict>
         </dict>
         <dict>
