@@ -53,11 +53,6 @@ class MSOffice2016URLandUpdateInfoProvider(Processor):
                             "supported value is 'latest', which is the "
                             "default."),
         },
-        "munki_update_name": {
-            "required": False,
-            "description": (
-                "Name for the update in Munki repo. Defaults to product name + '2016 Installer'"),
-        },
     }
     output_variables = {
         "url": {
