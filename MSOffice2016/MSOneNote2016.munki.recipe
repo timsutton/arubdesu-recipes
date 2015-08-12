@@ -4,6 +4,8 @@
 <dict>
     <key>Description</key>
     <string>Finds latest OneNote installer, downloads the pkg.
+
+Currently, the only supported value for VERSION is 'latest'.
 </string>
     <key>Identifier</key>
     <string>com.github.arubdesu.munki.MSOneNote2016</string>

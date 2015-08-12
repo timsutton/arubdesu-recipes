@@ -4,7 +4,8 @@
 <dict>
     <key>Description</key>
     <string>Finds latest Outlook installer, downloads the disk image and extracts the pkg.
-Set VERSION to a specific version number to download that version instead.
+
+Currently, the only supported value for VERSION is 'latest'.
 </string>
     <key>Identifier</key>
     <string>com.github.arubdesu.munki.MSPowerPoint2016</string>

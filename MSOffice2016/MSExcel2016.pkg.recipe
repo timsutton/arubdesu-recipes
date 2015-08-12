@@ -4,7 +4,8 @@
 <dict>
     <key>Description</key>
     <string>Finds latest Excel installer, and downloads the pkg.
-Set VERSION to a specific version number to download that version instead.
+
+Currently, the only supported value for VERSION is 'latest'.
 </string>
     <key>Identifier</key>
     <string>com.github.arubdesu.pkg.MSExcel2016</string>
